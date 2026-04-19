@@ -12,7 +12,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{-webkit-text-size-adjust:100%;font-family:'Sarabun',sans-serif}
-
 body{
   min-height:100vh;
   color:#1a1a2e;
@@ -24,140 +23,36 @@ body{
     linear-gradient(180deg, #05172f 0%, #0a2550 40%, #051024 100%);
   background-attachment:fixed;
 }
-
-.hero{
-  position:relative;
-  z-index:2;
-  padding:40px 20px 32px;
-  text-align:center;
-}
-
-.emblem{
-  width:92px;
-  height:92px;
-  margin:0 auto 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  filter:drop-shadow(0 4px 12px rgba(201,168,76,0.4));
-}
-
-.hero-title{
-  color:#fff;
-  font-size:30px;
-  font-weight:700;
-  letter-spacing:0.02em;
-  text-shadow:0 2px 16px rgba(0,0,0,0.5);
-  margin-bottom:4px;
-}
-
-.hero-sub{
-  color:rgba(255,255,255,0.4);
-  font-size:14px;
-  font-weight:400;
-  letter-spacing:0.12em;
-}
-
-.card{
-  position:relative;
-  z-index:2;
-  background:#fff;
-  margin:0 14px 24px;
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 12px 40px rgba(0,0,0,0.4);
-  animation:slideUp 0.5s ease both;
-}
-
-@keyframes slideUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.row{
-  display:flex;
-  align-items:center;
-  padding:16px 20px;
-  border-bottom:1px solid #e5e8ef;
-  background:#fff;
-  gap:8px;
-}
+.hero{position:relative;z-index:2;padding:40px 20px 32px;text-align:center;}
+.emblem{width:92px;height:92px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 4px 12px rgba(201,168,76,0.4));}
+.hero-title{color:#fff;font-size:30px;font-weight:700;letter-spacing:0.02em;text-shadow:0 2px 16px rgba(0,0,0,0.5);margin-bottom:4px;}
+.hero-sub{color:rgba(255,255,255,0.4);font-size:14px;font-weight:400;letter-spacing:0.12em;}
+.card{position:relative;z-index:2;background:#fff;margin:0 14px 24px;border-radius:8px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.4);animation:slideUp 0.5s ease both;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.row{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid #e5e8ef;background:#fff;gap:8px;}
 .row:nth-child(even){background:#f4f5f8}
 .row:last-child{border-bottom:none}
-
-.row-label{
-  color:#1a1a2e;
-  font-size:14px;
-  font-weight:700;
-  flex-shrink:0;
-}
-
-.row-val{
-  color:#2c3e5c;
-  font-size:14px;
-  font-weight:400;
-  flex:1;
-  word-break:break-word;
-}
-
-.row-val.mono{
-  font-family:'Courier New',monospace;
-  font-weight:500;
-  letter-spacing:0.02em;
-}
-
-.status-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  padding:3px 10px;
-  border-radius:12px;
-  font-size:12px;
-  font-weight:600;
-}
+.row-label{color:#1a1a2e;font-size:14px;font-weight:700;flex-shrink:0;}
+.row-val{color:#2c3e5c;font-size:14px;font-weight:400;flex:1;word-break:break-word;}
+.row-val.mono{font-family:'Courier New',monospace;font-weight:500;letter-spacing:0.02em;}
+.status-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;}
 .status-pill .dot{width:6px;height:6px;border-radius:50%}
-.status-active{background:#d1fae5;color:#065f46}
-.status-active .dot{background:#10b981}
-.status-repair{background:#fef3c7;color:#92400e}
-.status-repair .dot{background:#f59e0b}
-.status-broken{background:#fee2e2;color:#991b1b}
-.status-broken .dot{background:#ef4444}
-
-.state{
-  padding:60px 24px;
-  text-align:center;
-  background:#fff;
-}
-.spinner{
-  width:36px;height:36px;
-  border:3px solid #e5e8ef;
-  border-top-color:#1a3a6b;
-  border-radius:50%;
-  animation:spin 0.8s linear infinite;
-  margin:0 auto 14px;
-}
+.status-active{background:#d1fae5;color:#065f46}.status-active .dot{background:#10b981}
+.status-repair{background:#fef3c7;color:#92400e}.status-repair .dot{background:#f59e0b}
+.status-broken{background:#fee2e2;color:#991b1b}.status-broken .dot{background:#ef4444}
+.state{padding:60px 24px;text-align:center;background:#fff;}
+.spinner{width:36px;height:36px;border:3px solid #e5e8ef;border-top-color:#1a3a6b;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 14px;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .state-title{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
 .state-sub{font-size:13px;color:#6b7280}
 .state-icon{font-size:42px;margin-bottom:10px}
-
-.footer{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  color:rgba(255,255,255,0.3);
-  font-size:11px;
-  letter-spacing:0.08em;
-  padding:8px 20px 28px;
-}
+.footer{position:relative;z-index:2;text-align:center;color:rgba(255,255,255,0.3);font-size:11px;letter-spacing:0.08em;padding:8px 20px 28px;}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="emblem">
-    <span style="font-size:60px">⚓</span>
-  </div>
+  <div class="emblem"><span style="font-size:60px">⚓</span></div>
   <h1 class="hero-title">กรมกำลังพลทหารเรือ</h1>
   <p class="hero-sub">ครุภัณฑ์ กพ.ทร.</p>
 </div>
@@ -170,47 +65,14 @@ body{
   </div>
 
   <div id="content" style="display:none">
-    <div class="row">
-      <div class="row-label">หมายเลขครุภัณฑ์:</div>
-      <div class="row-val mono" id="f-asset_id">-</div>
-    </div>
-    <div class="row">
-      <div class="row-label">หมายสินทรัพย์:</div>
-      <div class="row-val mono" id="f-property_no">-</div>
-    </div>
-    
-    <div class="row">
-      <div class="row-label">รายละเอียด:</div>
-      <div class="row-val">
-        <span id="f-brand">-</span> / <span id="f-model">-</span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="row-label">S/N CPU:</div>
-      <div class="row-val mono" id="f-sn_cpu">-</div>
-    </div>
-    <div class="row">
-      <div class="row-label">S/N Monitor:</div>
-      <div class="row-val mono" id="f-sn_monitor">-</div>
-    </div>
-
-    <div class="row">
-      <div class="row-label">หน่วยความจำ:</div>
-      <div class="row-val">
-        ROM: <span id="f-hdd">-</span> | RAM: <span id="f-ram">-</span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="row-label">ผู้ใช้:</div>
-      <div class="row-val" id="f-user_name">-</div>
-    </div>
-    <div class="row">
-      <div class="row-label">สถานที่:</div>
-      <div class="row-val" id="f-location">-</div>
-    </div>
-
+    <div class="row"><div class="row-label">หมายเลขครุภัณฑ์:</div><div class="row-val mono" id="f-asset_id">-</div></div>
+    <div class="row"><div class="row-label">หมายสินทรัพย์:</div><div class="row-val mono" id="f-property_no">-</div></div>
+    <div class="row"><div class="row-label">รายละเอียด:</div><div class="row-val"><span id="f-brand">-</span> / <span id="f-model">-</span></div></div>
+    <div class="row"><div class="row-label">S/N CPU:</div><div class="row-val mono" id="f-sn_cpu">-</div></div>
+    <div class="row"><div class="row-label">S/N Monitor:</div><div class="row-val mono" id="f-sn_monitor">-</div></div>
+    <div class="row"><div class="row-label">หน่วยความจำ:</div><div class="row-val">ROM: <span id="f-hdd">-</span> | RAM: <span id="f-ram">-</span></div></div>
+    <div class="row"><div class="row-label">ผู้ใช้:</div><div class="row-val" id="f-user_name">-</div></div>
+    <div class="row"><div class="row-label">สถานที่:</div><div class="row-val" id="f-location">-</div></div>
     <div class="row">
       <div class="row-label">สถานะ:</div>
       <div class="row-val">
@@ -219,7 +81,6 @@ body{
         </span>
       </div>
     </div>
-
     <div class="row">
       <div class="row-label">การซ่อม:</div>
       <div class="row-val" style="font-size: 13px;">
@@ -240,21 +101,12 @@ body{
 <div class="footer">© กพ.ทร. ระบบครุภัณฑ์</div>
 
 <script>
-// ⚠️ สำคัญ: ตรวจสอบ URL ล่าสุดจาก Apps Script ของพี่นะครับ
+// URL ของ Google Apps Script (ตรวจสอบให้ตรงกับ URL ล่าสุดนะครับ)
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvD7d7WG1U4W4RdymF5qeLIqTl1xUDWw23QnvI5ZLr3R3Zy60PVNUV_b6rTnGx6FlbSQ/exec';
 
-const STATUS_MAP = {
-  'ใช้ราชการ': 'status-active',
-  'ใช้งานอยู่': 'status-active',
-  'ซ่อมบำรุง': 'status-repair',
-  'ชำรุด': 'status-broken',
-  'จำหน่าย': 'status-broken',
-};
+const STATUS_MAP = { 'ใช้ราชการ': 'status-active', 'ใช้งานอยู่': 'status-active', 'ซ่อมบำรุง': 'status-repair', 'ชำรุด': 'status-broken', 'จำหน่าย': 'status-broken' };
 
-function set(id, val){
-  const el = document.getElementById(id);
-  if(el) el.textContent = val || '-';
-}
+function set(id, val){ const el = document.getElementById(id); if(el) el.textContent = val || '-'; }
 
 function render(data){
   set('f-asset_id', data.asset_id);
@@ -263,20 +115,16 @@ function render(data){
   set('f-model', data.model);
   set('f-sn_cpu', data.sn_cpu);
   set('f-sn_monitor', data.sn_monitor);
-  set('f-hdd', data.hdd ? ('HDD ' + data.hdd) : '-');
-  set('f-ram', data.ram ? (String(data.ram).includes('GB') ? data.ram : data.ram + ' GB') : '-');
+  set('f-hdd', data.hdd);
+  set('f-ram', data.ram);
   set('f-user_name', data.user_name);
   set('f-location', data.location);
-  set('f-received_date', data.received_date);
   set('f-repair_1', data.repair_1);
   set('f-repair_2', data.repair_2);
   set('f-repair_3', data.repair_3);
-
   const status = data.status || 'ใช้ราชการ';
   set('f-status', status);
-  document.getElementById('f-status-pill').className =
-    'status-pill ' + (STATUS_MAP[status] || 'status-active');
-
+  document.getElementById('f-status-pill').className = 'status-pill ' + (STATUS_MAP[status] || 'status-active');
   document.getElementById('loading').style.display = 'none';
   document.getElementById('content').style.display = 'block';
 }
@@ -290,18 +138,17 @@ function showError(msg){
 async function load(){
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
+  if(!id){ showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL'); return; }
 
-  if(!id){
-    showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL');
-    return;
-  }
-
-  try{
+  try {
+    // ใช้ fetch แบบ No-Cache เพื่อป้องกันข้อมูลเก่าค้าง
     const res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
-      redirect: 'follow',
       method: 'GET',
       mode: 'cors',
+      cache: 'no-store',
+      redirect: 'follow'
     });
+    
     const json = await res.json();
     if(json.success && json.data){
       render(json.data);
@@ -312,7 +159,6 @@ async function load(){
     showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ (เช็คสิทธิ์การ Deploy เป็น Anyone)');
   }
 }
-
 load();
 </script>
 </body>
