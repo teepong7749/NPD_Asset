@@ -84,9 +84,9 @@ body{
     <div class="row">
       <div class="row-label">การซ่อม:</div>
       <div class="row-val" style="font-size: 13px;">
-        ครั้งที่ 1: <span id="f-repair_1">-</span> | 
-        ครั้งที่ 2: <span id="f-repair_2">-</span> | 
-        ครั้งที่ 3: <span id="f-repair_3">-</span>
+        1: <span id="f-repair_1">-</span> | 
+        2: <span id="f-repair_2">-</span> | 
+        3: <span id="f-repair_3">-</span>
       </div>
     </div>
   </div>
@@ -101,8 +101,8 @@ body{
 <div class="footer">© กพ.ทร. ระบบครุภัณฑ์</div>
 
 <script>
-// URL ของ Google Apps Script (ตรวจสอบให้ตรงกับ URL ล่าสุดนะครับ)
-const API_URL = 'https://script.google.com/macros/s/AKfycbx655bXgSAcYi7dYsehYxHl1sqUC4XgCdQwcAG-Nq7ZfVKeQ7-TSB9FoSWGFDJ9HfsK/exec';
+// ใส่ URL ล่าสุดที่คุณพี่ส่งมา
+const API_URL = 'https://script.google.com/macros/s/AKfycbxDfJ3o6n36rMKMkX7oNATq3jBSQtIsXsRQETOyv5TfqFk0mJeedVC9TH_28ioseoTj/exec';
 
 const STATUS_MAP = { 'ใช้ราชการ': 'status-active', 'ใช้งานอยู่': 'status-active', 'ซ่อมบำรุง': 'status-repair', 'ชำรุด': 'status-broken', 'จำหน่าย': 'status-broken' };
 
@@ -139,16 +139,13 @@ async function load(){
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if(!id){ showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL'); return; }
-
   try {
-    // ใช้ fetch แบบ No-Cache เพื่อป้องกันข้อมูลเก่าค้าง
     const res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
       method: 'GET',
       mode: 'cors',
       cache: 'no-store',
       redirect: 'follow'
     });
-    
     const json = await res.json();
     if(json.success && json.data){
       render(json.data);
@@ -156,7 +153,7 @@ async function load(){
       showError(json.error || 'ไม่พบข้อมูล');
     }
   } catch(err){
-    showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ (เช็คสิทธิ์การ Deploy เป็น Anyone)');
+    showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ (โปรดตรวจสอบสิทธิ์การเข้าถึง)');
   }
 }
 load();
