@@ -172,10 +172,12 @@ body{
   <div id="content" style="display:none">
     <div class="row"><div class="row-label">หมายเลขครุภัณฑ์:</div><div class="row-val mono" id="f-asset_id">-</div></div>
     <div class="row"><div class="row-label">หมายสินทรัพย์:</div><div class="row-val mono" id="f-property_no">-</div></div>
-    <div class="row"><div class="row-label">ตราอักษร:</div><div class="row-val" id="f-brand">-</div></div> <div class="row"><div class="row-label">รุ่น:</div><div class="row-val" id="f-model">-</div></div>
+    <div class="row"><div class="row-label">ตราอักษร:</div><div class="row-val" id="f-brand">-</div></div>
+    <div class="row"><div class="row-label">รุ่น:</div><div class="row-val" id="f-model">-</div></div>
     <div class="row"><div class="row-label">S/N CPU:</div><div class="row-val mono" id="f-sn_cpu">-</div></div>
     <div class="row"><div class="row-label">S/N Monitor:</div><div class="row-val mono" id="f-sn_monitor">-</div></div>
-    <div class="row"><div class="row-label">ROM:</div><div class="row-val" id="f-hdd">-</div></div> <div class="row"><div class="row-label">RAM:</div><div class="row-val" id="f-ram">-</div></div>
+    <div class="row"><div class="row-label">ROM:</div><div class="row-val" id="f-hdd">-</div></div>
+    <div class="row"><div class="row-label">RAM:</div><div class="row-val" id="f-ram">-</div></div>
     <div class="row"><div class="row-label">ผู้ใช้:</div><div class="row-val" id="f-user_name">-</div></div>
     <div class="row"><div class="row-label">สถานที่:</div><div class="row-val" id="f-location">-</div></div>
     <div class="row"><div class="row-label">วันที่รับ:</div><div class="row-val" id="f-received_date">-</div></div>
@@ -185,11 +187,11 @@ body{
         <span class="status-pill status-active" id="f-status-pill">
           <span class="dot"></span><span id="f-status">-</span>
         </span>
+      </div>
+    </div>
     <div class="row"><div class="row-label">การซ่อมครั้งที่ 1:</div><div class="row-val" id="f-repair_1">-</div></div>
     <div class="row"><div class="row-label">การซ่อมครั้งที่ 2:</div><div class="row-val" id="f-repair_2">-</div></div>
     <div class="row"><div class="row-label">การซ่อมครั้งที่ 3:</div><div class="row-val" id="f-repair_3">-</div></div>
-      </div>
-    </div>
   </div>
 
   <div class="state" id="error" style="display:none">
@@ -202,8 +204,8 @@ body{
 <div class="footer">© กพ.ทร. ระบบครุภัณฑ์</div>
 
 <script>
-// URL ของ Google Apps Script ที่แก้ไขแล้ว
-const API_URL = 'https://script.google.com/macros/s/AKfycbx655bXgSAcYi7dYsehYxHl1sqUC4XgCdQwcAG-Nq7ZfVKeQ7-TSB9FoSWGFDJ9HfsK/exec';
+// ⚠️ สำคัญ: ตรวจสอบ URL ล่าสุดจาก Apps Script ของพี่นะครับ
+const API_URL = 'https://script.google.com/macros/s/AKfycbxvD7d7WG1U4W4RdymF5qeLIqTl1xUDWw23QnvI5ZLr3R3Zy60PVNUV_b6rTnGx6FlbSQ/exec';
 
 const STATUS_MAP = {
   'ใช้ราชการ': 'status-active',
@@ -259,20 +261,19 @@ async function load(){
   }
 
   try{
-    // เปลี่ยนมาใช้การดึงข้อมูลแบบอ้อมเพื่อให้ผ่านระบบรักษาความปลอดภัย
-const res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
-  redirect: 'follow', // บอกให้ Google ยอมส่งข้อมูลให้
-  method: 'GET',
-  mode: 'cors',
-});
-const json = await res.json();
+    const res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
+      redirect: 'follow',
+      method: 'GET',
+      mode: 'cors',
+    });
+    const json = await res.json();
     if(json.success && json.data){
       render(json.data);
     } else {
       showError(json.error || 'ไม่พบข้อมูล');
     }
   } catch(err){
-    showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้');
+    showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ (เช็คสิทธิ์การ Deploy เป็น Anyone)');
   }
 }
 
