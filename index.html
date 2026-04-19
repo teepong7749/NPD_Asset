@@ -10,10 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ════════════════════════════════════════════════════════
-   🎨 ส่วนที่ต้องแก้เอง (อ่านคอมเมนต์ "👉 แก้ตรงนี้")
-   ════════════════════════════════════════════════════════ */
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{-webkit-text-size-adjust:100%;font-family:'Sarabun',sans-serif}
 
@@ -22,15 +18,6 @@ body{
   color:#1a1a2e;
   position:relative;
   overflow-x:hidden;
-
-  /* 👉 แก้ตรงนี้ #1: รูปพื้นหลัง (background)
-     ───────────────────────────────────────────
-     ตอนนี้ใช้สีน้ำเงินไล่เฉดไปก่อน
-     ถ้าอยากใส่รูปพื้นหลังจริง ให้:
-     1. วางไฟล์รูป (เช่น bg.jpg) ไว้โฟลเดอร์เดียวกับ index.html
-     2. เปลี่ยน background ด้านล่างเป็น:
-        background: url('bg.jpg') center/cover no-repeat fixed, #05172f;
-     ─────────────────────────────────────────── */
   background:
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20,60,120,0.4), transparent 60%),
     radial-gradient(ellipse 60% 80% at 10% 40%, rgba(120,30,40,0.25), transparent 55%),
@@ -38,9 +25,6 @@ body{
   background-attachment:fixed;
 }
 
-/* ════════════════════════════════════════════════════════
-   ส่วน HERO (หัวเว็บ - โลโก้ + ชื่อ)
-   ════════════════════════════════════════════════════════ */
 .hero{
   position:relative;
   z-index:2;
@@ -48,26 +32,19 @@ body{
   text-align:center;
 }
 
-/* 👉 แก้ตรงนี้ #2: ขนาดกล่องโลโก้ */
 .emblem{
-  width:92px;             /* ← แก้ขนาดได้ */
+  width:92px;
   height:92px;
   margin:0 auto 14px;
   display:flex;
   align-items:center;
   justify-content:center;
-  filter:drop-shadow(0 4px 12px rgba(201,168,76,0.4));  /* เงาสีทอง */
-}
-
-.emblem img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
+  filter:drop-shadow(0 4px 12px rgba(201,168,76,0.4));
 }
 
 .hero-title{
   color:#fff;
-  font-size:30px;          /* 👉 แก้ขนาดตัวอักษรชื่อได้ */
+  font-size:30px;
   font-weight:700;
   letter-spacing:0.02em;
   text-shadow:0 2px 16px rgba(0,0,0,0.5);
@@ -81,9 +58,6 @@ body{
   letter-spacing:0.12em;
 }
 
-/* ════════════════════════════════════════════════════════
-   ส่วน CARD (กล่องขาวแสดงข้อมูล)
-   ════════════════════════════════════════════════════════ */
 .card{
   position:relative;
   z-index:2;
@@ -100,7 +74,6 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
-/* แถวข้อมูลแต่ละบรรทัด */
 .row{
   display:flex;
   align-items:center;
@@ -109,7 +82,7 @@ body{
   background:#fff;
   gap:8px;
 }
-.row:nth-child(even){background:#f4f5f8}  /* สลับสีเทา */
+.row:nth-child(even){background:#f4f5f8}
 .row:last-child{border-bottom:none}
 
 .row-label{
@@ -133,7 +106,6 @@ body{
   letter-spacing:0.02em;
 }
 
-/* ป้ายสถานะสี */
 .status-pill{
   display:inline-flex;
   align-items:center;
@@ -151,9 +123,6 @@ body{
 .status-broken{background:#fee2e2;color:#991b1b}
 .status-broken .dot{background:#ef4444}
 
-/* ════════════════════════════════════════════════════════
-   Loading / Error state
-   ════════════════════════════════════════════════════════ */
 .state{
   padding:60px 24px;
   text-align:center;
@@ -185,61 +154,22 @@ body{
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════════════
-     HERO SECTION
-     ════════════════════════════════════════════════════════ -->
 <div class="hero">
-
-  <!-- 👉 แก้ตรงนี้ #3: โลโก้ กพ.ทร.
-       ───────────────────────────────────────────
-       ตอนนี้ใช้ emoji ⚓ เป็น placeholder
-       ถ้าอยากใส่รูปโลโก้จริง ให้:
-       1. วางไฟล์รูป (เช่น logo.png) ไว้โฟลเดอร์เดียวกับ index.html
-       2. ลบบรรทัดที่เป็น emoji ⚓ ออก
-       3. uncomment บรรทัด <img> ด้านล่าง
-       ─────────────────────────────────────────── -->
   <div class="emblem">
-
-    <!-- แบบที่ 1: ใช้ emoji (ตอนนี้ใช้อยู่) -->
     <span style="font-size:60px">⚓</span>
-
-    <!-- แบบที่ 2: ใช้รูปจริง (เอา comment ออกเพื่อใช้งาน)
-    <img src="logo.png" alt="กพ.ทร.">
-    -->
-
   </div>
-
   <h1 class="hero-title">กรมกำลังพลทหารเรือ</h1>
   <p class="hero-sub">ครุภัณฑ์ กพ.ทร.</p>
 </div>
 
-<!-- ════════════════════════════════════════════════════════
-     CARD - ข้อมูลครุภัณฑ์
-     ════════════════════════════════════════════════════════ -->
 <div class="card" id="card">
-
-  <!-- Loading state -->
   <div class="state" id="loading">
     <div class="spinner"></div>
     <div class="state-title">กำลังโหลดข้อมูล...</div>
     <div class="state-sub">กรุณารอสักครู่</div>
   </div>
 
-  <!-- Content (ซ่อนไว้จนกว่าจะโหลดเสร็จ) -->
   <div id="content" style="display:none">
-
-    <!-- 👉 แก้ตรงนี้ #4: เพิ่ม/ลบ/แก้ไขแถวข้อมูลได้
-         ───────────────────────────────────────────
-         แต่ละแถวมีรูปแบบ:
-         <div class="row">
-           <div class="row-label">ข้อความหัว:</div>
-           <div class="row-val" id="f-XXXX">-</div>
-         </div>
-
-         - ถ้าอยากเป็นตัวอักษร mono (เหมือน S/N) ใส่ class="row-val mono"
-         - id ต้องขึ้นต้นด้วย f- แล้วตามด้วยชื่อคอลัมน์ใน Sheet
-         ─────────────────────────────────────────── -->
-
     <div class="row"><div class="row-label">หมายเลขครุภัณฑ์:</div><div class="row-val mono" id="f-asset_id">-</div></div>
     <div class="row"><div class="row-label">หมายสินทรัพย์:</div><div class="row-val mono" id="f-property_no">-</div></div>
     <div class="row"><div class="row-label">ตราอักษร:</div><div class="row-val" id="f-brand">-</div></div>
@@ -261,60 +191,18 @@ body{
     </div>
   </div>
 
-  <!-- Error state -->
   <div class="state" id="error" style="display:none">
     <div class="state-icon">⚠️</div>
     <div class="state-title">ไม่พบข้อมูลครุภัณฑ์</div>
     <div class="state-sub" id="error-msg">กรุณาตรวจสอบ QR Code อีกครั้ง</div>
   </div>
-
 </div>
 
 <div class="footer">© กพ.ทร. ระบบครุภัณฑ์</div>
 
 <script>
-/* ════════════════════════════════════════════════════════
-   ⚙️ ส่วนตั้งค่า (ต้องแก้)
-   ════════════════════════════════════════════════════════ */
-
-// 👉 แก้ตรงนี้ #5: ใส่ URL ของ Google Apps Script
-// ─────────────────────────────────────────────
-// 1. Deploy Apps Script แล้วจะได้ URL หน้าตาแบบ:
-//    https://script.google.com/macros/s/xxxxxx/exec
-// 2. เอามาวางแทนที่ 'YOUR_APPS_SCRIPT_URL_HERE'
-// ─────────────────────────────────────────────
+// URL ของ Google Apps Script ที่แก้ไขแล้ว
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvD7d7WG1U4W4RdymF5qeLIqTl1xUDWw23QnvI5ZLr3R3Zy60PVNUV_b6rTnGx6FlbSQ/exec';
-to gus kear
-info all
-Bt 
-1.จัดทำgoogle sheet ip กพ.ทร. เพื่อง่ายและรวดเร็วการดู,ตรวจสอบและupdate ข้อมูล 
-2.ข้อมูล ip กพ.กำลังดำเดินการลงข้อมูลในเว็บ ip.navy อยู่ครับ
-BT AR
-
-
-
-
-
-
-
-import requests
-import json
-response_API = requests.get('https://script.google.com/macros/s/AKfycbxvD7d7WG1U4W4RdymF5qeLIqTl1xUDWw23QnvI5ZLr3R3Zy60PVNUV_b6rTnGx6FlbSQ/exec')
-#print(response_API.status_code)
-
-
-df = pd.read_json('data.json')
-print(df)
-
-data = response_API.text
-parse_json = json.loads(data)
-print(parse_json['data'])
-';
-
-
-/* ════════════════════════════════════════════════════════
-   ส่วน Logic (ไม่ต้องแก้)
-   ════════════════════════════════════════════════════════ */
 
 const STATUS_MAP = {
   'ใช้ราชการ': 'status-active',
@@ -330,7 +218,6 @@ function set(id, val){
 }
 
 function render(data){
-  // ใส่ข้อมูลลงในแต่ละช่อง
   set('f-asset_id', data.asset_id);
   set('f-property_no', data.property_no);
   set('f-brand', data.brand);
@@ -343,7 +230,6 @@ function render(data){
   set('f-location', data.location);
   set('f-received_date', data.received_date);
 
-  // ป้ายสถานะ
   const status = data.status || 'ใช้ราชการ';
   set('f-status', status);
   document.getElementById('f-status-pill').className =
@@ -363,35 +249,11 @@ async function load(){
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
 
-  // ═══════════════════════════════════════════════
-  // โหมดทดสอบ (Demo) - ใช้เมื่อยังไม่ได้ตั้ง API_URL
-  // ═══════════════════════════════════════════════
-  if(API_URL === 'https://script.google.com/macros/s/AKfycbx655bXgSAcYi7dYsehYxHl1sqUC4XgCdQwcAG-Nq7ZfVKeQ7-TSB9FoSWGFDJ9HfsK/exec'){
-    setTimeout(() => {
-      render({
-        asset_id: id || '13000200-7010201-0001',
-        property_no: '100000078428',
-        brand: 'ACER',
-        model: 'Veriton M2610G',
-        sn_cpu: 'UDVDKST468P32121177848',
-        sn_monitor: 'MMLS0SS005247012EF4216',
-        hdd: '500 GB',
-        ram: '4',
-        user_name: 'พ.จ.อ.ธีรพงษ์ ทรัพย์เฉลิม',
-        location: 'กวป.สพพ.กพ.ทร.',
-        received_date: '5 เม.ย. 56',
-        status: 'ใช้ราชการ'
-      });
-    }, 400);
-    return;
-  }
-
   if(!id){
     showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL');
     return;
   }
 
-  // เรียก API จริง
   try{
     const res = await fetch(API_URL + '?id=' + encodeURIComponent(id));
     const json = await res.json();
