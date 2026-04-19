@@ -172,12 +172,10 @@ body{
   <div id="content" style="display:none">
     <div class="row"><div class="row-label">หมายเลขครุภัณฑ์:</div><div class="row-val mono" id="f-asset_id">-</div></div>
     <div class="row"><div class="row-label">หมายสินทรัพย์:</div><div class="row-val mono" id="f-property_no">-</div></div>
-    <div class="row"><div class="row-label">ตราอักษร:</div><div class="row-val" id="f-brand">-</div></div>
-    <div class="row"><div class="row-label">รุ่น:</div><div class="row-val" id="f-model">-</div></div>
+    <div class="row"><div class="row-label">ตราอักษร:</div><div class="row-val" id="f-brand">-</div></div> <div class="row"><div class="row-label">รุ่น:</div><div class="row-val" id="f-model">-</div></div>
     <div class="row"><div class="row-label">S/N CPU:</div><div class="row-val mono" id="f-sn_cpu">-</div></div>
     <div class="row"><div class="row-label">S/N Monitor:</div><div class="row-val mono" id="f-sn_monitor">-</div></div>
-    <div class="row"><div class="row-label">ROM:</div><div class="row-val" id="f-hdd">-</div></div>
-    <div class="row"><div class="row-label">RAM:</div><div class="row-val" id="f-ram">-</div></div>
+    <div class="row"><div class="row-label">ROM:</div><div class="row-val" id="f-hdd">-</div></div> <div class="row"><div class="row-label">RAM:</div><div class="row-val" id="f-ram">-</div></div>
     <div class="row"><div class="row-label">ผู้ใช้:</div><div class="row-val" id="f-user_name">-</div></div>
     <div class="row"><div class="row-label">สถานที่:</div><div class="row-val" id="f-location">-</div></div>
     <div class="row"><div class="row-label">วันที่รับ:</div><div class="row-val" id="f-received_date">-</div></div>
@@ -187,6 +185,9 @@ body{
         <span class="status-pill status-active" id="f-status-pill">
           <span class="dot"></span><span id="f-status">-</span>
         </span>
+    <div class="row"><div class="row-label">การซ่อมครั้งที่ 1:</div><div class="row-val" id="f-repair_1">-</div></div>
+    <div class="row"><div class="row-label">การซ่อมครั้งที่ 2:</div><div class="row-val" id="f-repair_2">-</div></div>
+    <div class="row"><div class="row-label">การซ่อมครั้งที่ 3:</div><div class="row-val" id="f-repair_3">-</div></div>
       </div>
     </div>
   </div>
@@ -229,6 +230,9 @@ function render(data){
   set('f-user_name', data.user_name);
   set('f-location', data.location);
   set('f-received_date', data.received_date);
+  set('f-repair_1', data.repair_1);
+  set('f-repair_2', data.repair_2);
+  set('f-repair_3', data.repair_3);
 
   const status = data.status || 'ใช้ราชการ';
   set('f-status', status);
