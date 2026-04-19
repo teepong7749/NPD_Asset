@@ -259,8 +259,13 @@ async function load(){
   }
 
   try{
-    const res = await fetch(API_URL + '?id=' + encodeURIComponent(id));
-    const json = await res.json();
+    // เปลี่ยนมาใช้การดึงข้อมูลแบบอ้อมเพื่อให้ผ่านระบบรักษาความปลอดภัย
+const res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
+  redirect: 'follow', // บอกให้ Google ยอมส่งข้อมูลให้
+  method: 'GET',
+  mode: 'cors',
+});
+const json = await res.json();
     if(json.success && json.data){
       render(json.data);
     } else {
