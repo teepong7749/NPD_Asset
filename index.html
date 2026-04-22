@@ -365,24 +365,33 @@ async function load() {
   }
 
   /* เรียก API */
-  try {
-    var res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-store',
-      redirect: 'follow'
-    });
-    var json = await res.json();
+  var maxRetry = 3;
+  for (var attempt = 1; attempt <= maxRetry; attempt++) {
+    try {
+      var res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store',
+        redirect: 'follow'
+      });
+      var json = await res.json();
 
-    if (json.success && json.data) {
-      render(json.data);
-    } else {
-      showError(json.error || 'ไม่พบข้อมูลหมายเลข: ' + id);
+      if (json.success && json.data) {
+        render(json.data);
+        return;
+      } else {
+        showError(json.error || 'ไม่พบข้อมูลหมายเลข: ' + id);
+        return;
+      }
+    } catch (err) {
+      if (attempt < maxRetry) {
+        console.log('ลองใหม่ครั้งที่ ' + (attempt + 1));
+        await new Promise(r => setTimeout(r, 2000));
+      } else {
+        showError('เชื่อมต่อไม่ได้ กรุณากดรีเฟรช');
+      }
     }
-  } catch (err) {
-    showError('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ — ' + err.message);
   }
-}
 
 /* เริ่มโหลดทันที */
 load();
