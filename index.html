@@ -354,46 +354,28 @@ function showError(msg) {
 
 /* ═══ โหลดข้อมูลจาก API ═══ */
 async function load() {
-  /* อ่าน ?id=xxxxx จาก URL */
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id');
 
-  /* ถ้าไม่มี id → error */
   if (!id) {
-    showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL (ต้องใส่ ?id=xxxxx)');
+    showError('ไม่ได้ระบุหมายเลขครุภัณฑ์ใน URL');
     return;
   }
 
-  /* เรียก API */
-  var maxRetry = 5;
-  for (var attempt = 1; attempt <= maxRetry; attempt++) {
-    try {
-      var res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-store',
-        redirect: 'follow'
-      });
-      var json = await res.json();
+  try {
+    var res = await fetch('data.json');
+    var allData = await res.json();
 
-      if (json.success && json.data) {
-        render(json.data);
-        return;
-      } else {
-        showError(json.error || 'ไม่พบข้อมูลหมายเลข: ' + id);
-        return;
-      }
-    } catch (err) {
-      if (attempt < maxRetry) {
-        console.log('ลองใหม่ครั้งที่ ' + (attempt + 1));
-        await new Promise(r => setTimeout(r, 5000));
-      } else {
-        showError('เชื่อมต่อไม่ได้ กรุณากดรีเฟรช');
-      }
+    if (allData[id]) {
+      render(allData[id]);
+    } else {
+      showError('ไม่พบข้อมูลหมายเลข: ' + id);
     }
+  } catch (err) {
+    showError('โหลดข้อมูลไม่ได้ — ' + err.message);
   }
+}
 
-/* เริ่มโหลดทันที */
 load();
 </script>
 </body>
