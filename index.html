@@ -365,7 +365,7 @@ async function load() {
   }
 
   /* เรียก API */
-  var maxRetry = 3;
+  var maxRetry = 5;
   for (var attempt = 1; attempt <= maxRetry; attempt++) {
     try {
       var res = await fetch(API_URL + '?id=' + encodeURIComponent(id), {
@@ -386,7 +386,7 @@ async function load() {
     } catch (err) {
       if (attempt < maxRetry) {
         console.log('ลองใหม่ครั้งที่ ' + (attempt + 1));
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 5000));
       } else {
         showError('เชื่อมต่อไม่ได้ กรุณากดรีเฟรช');
       }
