@@ -56,7 +56,7 @@ body{
 .emblem{
   width:92px;                 /* ขนาดกว้าง */
   height:92px;                /* ขนาดสูง */
-  margin:0 auto 10px;         /* อยู่กลาง + ห่างจากชื่อ 14px */
+  margin:0 auto 5px;         /* อยู่กลาง + ห่างจากชื่อ 14px */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -132,12 +132,21 @@ body{
 }
 
 /* ค่าที่แสดง - ตัวหนา สีเข้ม */
-.row-val{
-  color:#1a1a2e;
-  font-size:18px;
-  font-weight:700;
-  flex:1;
-  word-break:break-word;
+row-val {
+  color: #1a1a2e;
+  font-weight: 700;
+  flex: 1;
+
+  /* 1. บังคับห้ามตัดขึ้นบรรทัดใหม่เด็ดขาด */
+  white-space: nowrap;
+  
+  /* 2. ถ้าจอมือถือเล็กมากๆ จนหดสุดแล้วยังล้น ให้ซ่อนแล้วใส่จุดไข่ปลา (...) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* 3. พระเอกของเรา: ปรับขนาดอัตโนมัติ 
+     (เล็กสุดห้ามต่ำกว่า 12px, ขยายตามหน้าจอที่ 4vw, ใหญ่สุดห้ามเกิน 18px) */
+  font-size: clamp(12px, 4vw, 18px);
 }
 
 /* ค่า Serial Number - ฟอนต์ monospace */
@@ -223,51 +232,51 @@ body{
   <div id="content" style="display:none">
 
     <div class="row">
-      <div class="row-label">หมายเลขครุภัณฑ์:</div>
+      <div class="row-label">หมายเลขครุภัณฑ์ :</div>
       <div class="row-val mono" id="f-asset_id">-</div>
     </div>
 
     <div class="row">
-      <div class="row-label">หมายสินทรัพย์:</div>
+      <div class="row-label">หมายสินทรัพย์ :</div>
       <div class="row-val mono" id="f-property_no">-</div>
     </div>
 
     <!-- ตราอักษร + รุ่น อยู่บรรทัดเดียวกัน เว้น 4 เคาะ -->
     <div class="row">
-      <div class="row-label">ตราอักษร:</div>
+      <div class="row-label">ตราอักษร :</div>
       <div class="row-val">
-        <span id="f-brand">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6b7280;font-weight:400;font-size:13px">รุ่น:</span>&nbsp;&nbsp;<span id="f-model">-</span>
+        <span id="f-brand">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6b7280;font-weight:400;font-size:13px">รุ่น :</span>&nbsp;&nbsp;<span id="f-model">-</span>
       </div>
     </div>
 
     <div class="row">
-      <div class="row-label">S/N CPU:</div>
+      <div class="row-label">S/N CPU :</div>
       <div class="row-val mono" id="f-sn_cpu">-</div>
     </div>
 
     <div class="row">
-      <div class="row-label">S/N Monitor:</div>
+      <div class="row-label">S/N Monitor :</div>
       <div class="row-val mono" id="f-sn_monitor">-</div>
     </div>
 
     <div class="row">
-      <div class="row-label">หน่วยความจำ:</div>
-      <div class="row-val">ROM: <span id="f-hdd">-</span> | RAM: <span id="f-ram">-</span></div>
+      <div class="row-label">หน่วยความจำ :</div>
+      <div class="row-val">ROM : <span id="f-hdd">-</span> | RAM : <span id="f-ram">-</span></div>
     </div>
 
     <div class="row">
-      <div class="row-label">ผู้ใช้:</div>
+      <div class="row-label">ผู้ใช้ :</div>
       <div class="row-val" id="f-user_name">-</div>
     </div>
 
     <div class="row">
-      <div class="row-label">สถานที่:</div>
+      <div class="row-label">สถานที่ :</div>
       <div class="row-val" id="f-location">-</div>
     </div>
 
     <!-- สถานะ + ป้ายสี -->
     <div class="row">
-      <div class="row-label">สถานะ:</div>
+      <div class="row-label">สถานะ :</div>
       <div class="row-val">
         <span class="status-pill status-active" id="f-status-pill">
           <span class="dot"></span>
@@ -278,7 +287,7 @@ body{
 
     <!-- การซ่อมทำครั้งที่ 1, 2, 3 -->
     <div class="row">
-      <div class="row-label">การซ่อม:</div>
+      <div class="row-label">การซ่อม :</div>
       <div class="row-val" style="font-size:13px">
         1: <span id="f-repair_1">-</span> |
         2: <span id="f-repair_2">-</span> |
