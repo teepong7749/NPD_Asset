@@ -503,8 +503,7 @@ textarea.field-input{min-height:65px; resize:vertical}
     <div class="modal-header">
       <span class="modal-header-icon">🔧</span>
       <div class="modal-header-text">
-        <h3>แจ้งซ่อมครุภัณฑ์</h3>
-        <p>ข้อมูลเครื่องดึงให้อัตโนมัติ — กรอกเฉพาะอาการเสีย</p>
+        <h3>แจ้งซ่อมครุภัณฑ์ สาย สสท.</h3>
       </div>
       <button class="modal-close" onclick="closeRepairModal()">✕</button>
     </div>
@@ -512,28 +511,25 @@ textarea.field-input{min-height:65px; resize:vertical}
     <!-- Body -->
     <div class="modal-body">
  
-      <!-- ข้อมูลเครื่อง AUTO -->
+      <!-- ข้อมูลเครื่อง -->
       <div class="auto-info">
         <div class="auto-info-head">
           <span>ข้อมูลเครื่อง</span>
           <span class="auto-tag">AUTO</span>
         </div>
         <div class="auto-row">
-          <span class="auto-row-icon">📋</span>
           <div>
             <div class="auto-row-label">หมายเลขครุภัณฑ์</div>
             <div class="auto-row-val mono" id="m-asset_id">-</div>
           </div>
         </div>
         <div class="auto-row">
-          <span class="auto-row-icon">🏷️</span>
           <div>
             <div class="auto-row-label">ยี่ห้อ / รุ่น</div>
             <div class="auto-row-val" id="m-brand_model">-</div>
           </div>
         </div>
         <div class="auto-row">
-          <span class="auto-row-icon">🔢</span>
           <div>
             <div class="auto-row-label">S/N CPU</div>
             <div class="auto-row-val mono" id="m-sn_cpu">-</div>
@@ -547,7 +543,6 @@ textarea.field-input{min-height:65px; resize:vertical}
           </div>
         </div>
         <div class="auto-row">
-          <span class="auto-row-icon">👤</span>
           <div>
             <div class="auto-row-label">ผู้ใช้เครื่อง</div>
             <div class="auto-row-val" id="m-user_name">-</div>
@@ -558,7 +553,7 @@ textarea.field-input{min-height:65px; resize:vertical}
       <!-- เส้นคั่น -->
       <div class="form-divider"><span>กรอกข้อมูลเพิ่มเติม</span></div>
  
-      <!-- ผู้แจ้ง -->
+      <!-- ผู้แจ้งซ่อม -->
       <div class="field">
         <label class="field-label">ผู้แจ้งซ่อม <span class="req">*</span></label>
         <input class="field-input" id="inp-reporter" placeholder="ชื่อ-สกุล ผู้แจ้ง">
@@ -567,7 +562,7 @@ textarea.field-input{min-height:65px; resize:vertical}
       <!-- เบอร์โทร -->
       <div class="field">
         <label class="field-label">เบอร์โทร <span class="req">*</span></label>
-        <input class="field-input" id="inp-phone" type="tel" placeholder="0xx-xxx-xxxx">
+        <input class="field-input" id="inp-phone" type="tel" placeholder="5xxxx">
       </div>
  
       <!-- อาการเสีย -->
@@ -577,9 +572,10 @@ textarea.field-input{min-height:65px; resize:vertical}
           <button class="chip active" data-val="เปิดไม่ติด">เปิดไม่ติด</button>
           <button class="chip" data-val="จอไม่แสดงผล">จอไม่แสดงผล</button>
           <button class="chip" data-val="เครื่องช้า/ค้าง">เครื่องช้า/ค้าง</button>
-          <button class="chip" data-val="เสียงผิดปกติ">เสียงผิดปกติ</button>
+          <button class="chip" data-val="word/excel ใช้ไม่ได้">เword/excel ใช้ไม่ได้</button>
           <button class="chip" data-val="คีย์บอร์ด/เมาส์">คีย์บอร์ด/เมาส์</button>
-          <button class="chip" data-val="เน็ตเวิร์ค">เน็ตเวิร์ค</button>
+          <button class="chip" data-val="เน็ตภายนอก">เน็ตภายนอก</button>
+          <button class="chip" data-val="เน็ตภายใน">เน็ตภายใน</button>
           <button class="chip" data-val="อื่นๆ">อื่นๆ</button>
         </div>
       </div>
