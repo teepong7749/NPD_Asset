@@ -489,8 +489,134 @@ textarea.field-input{min-height:65px; resize:vertical}
 </div>
 
 <div class="footer">#The best way to get started is to quit talking and begin doing.</div>
+  <!-- ═══ ปุ่มแจ้งซ่อม (ใหม่) ═══ -->
+<div class="repair-btn-wrap" id="repair-btn-wrap" style="display:none">
+  <button class="repair-btn" onclick="openRepairModal()">
+    <span class="btn-icon">🔧</span> แจ้งซ่อม
+  </button>
+</div>
+ 
+<div class="footer">#The best way to get started is to quit talking and begin doing.</div>
+ 
+<!-- ═══ Popup แจ้งซ่อม (ใหม่) ═══ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" onclick="event.stopPropagation()">
+ 
+    <!-- Header -->
+    <div class="modal-header">
+      <span class="modal-header-icon">🔧</span>
+      <div class="modal-header-text">
+        <h3>แจ้งซ่อมครุภัณฑ์</h3>
+        <p>ข้อมูลเครื่องดึงให้อัตโนมัติ — กรอกเฉพาะอาการเสีย</p>
+      </div>
+      <button class="modal-close" onclick="closeRepairModal()">✕</button>
+    </div>
+ 
+    <!-- Body -->
+    <div class="modal-body">
+ 
+      <!-- ข้อมูลเครื่อง AUTO -->
+      <div class="auto-info">
+        <div class="auto-info-head">
+          <span>ข้อมูลเครื่อง</span>
+          <span class="auto-tag">AUTO</span>
+        </div>
+        <div class="auto-row">
+          <span class="auto-row-icon">📋</span>
+          <div>
+            <div class="auto-row-label">หมายเลขครุภัณฑ์</div>
+            <div class="auto-row-val mono" id="m-asset_id">-</div>
+          </div>
+        </div>
+        <div class="auto-row">
+          <span class="auto-row-icon">🏷️</span>
+          <div>
+            <div class="auto-row-label">ยี่ห้อ / รุ่น</div>
+            <div class="auto-row-val" id="m-brand_model">-</div>
+          </div>
+        </div>
+        <div class="auto-row">
+          <span class="auto-row-icon">🔢</span>
+          <div>
+            <div class="auto-row-label">S/N CPU</div>
+            <div class="auto-row-val mono" id="m-sn_cpu">-</div>
+          </div>
+        </div>
+        <div class="auto-row">
+          <span class="auto-row-icon">📍</span>
+          <div>
+            <div class="auto-row-label">สถานที่ติดตั้ง</div>
+            <div class="auto-row-val" id="m-location">-</div>
+          </div>
+        </div>
+        <div class="auto-row">
+          <span class="auto-row-icon">👤</span>
+          <div>
+            <div class="auto-row-label">ผู้ใช้เครื่อง</div>
+            <div class="auto-row-val" id="m-user_name">-</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- เส้นคั่น -->
+      <div class="form-divider"><span>กรอกข้อมูลเพิ่มเติม</span></div>
+ 
+      <!-- ผู้แจ้ง -->
+      <div class="field">
+        <label class="field-label">ผู้แจ้งซ่อม <span class="req">*</span></label>
+        <input class="field-input" id="inp-reporter" placeholder="ชื่อ-สกุล ผู้แจ้ง">
+      </div>
+ 
+      <!-- เบอร์โทร -->
+      <div class="field">
+        <label class="field-label">เบอร์โทร <span class="req">*</span></label>
+        <input class="field-input" id="inp-phone" type="tel" placeholder="0xx-xxx-xxxx">
+      </div>
+ 
+      <!-- อาการเสีย -->
+      <div class="field">
+        <label class="field-label">อาการเสีย</label>
+        <div class="chip-group" id="chip-group">
+          <button class="chip active" data-val="เปิดไม่ติด">เปิดไม่ติด</button>
+          <button class="chip" data-val="จอไม่แสดงผล">จอไม่แสดงผล</button>
+          <button class="chip" data-val="เครื่องช้า/ค้าง">เครื่องช้า/ค้าง</button>
+          <button class="chip" data-val="เสียงผิดปกติ">เสียงผิดปกติ</button>
+          <button class="chip" data-val="คีย์บอร์ด/เมาส์">คีย์บอร์ด/เมาส์</button>
+          <button class="chip" data-val="เน็ตเวิร์ค">เน็ตเวิร์ค</button>
+          <button class="chip" data-val="อื่นๆ">อื่นๆ</button>
+        </div>
+      </div>
+ 
+      <!-- รายละเอียด -->
+      <div class="field">
+        <label class="field-label">รายละเอียดเพิ่มเติม</label>
+        <textarea class="field-input" id="inp-detail" placeholder="อธิบายอาการเพิ่มเติม..."></textarea>
+      </div>
+    </div>
+ 
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeRepairModal()">ยกเลิก</button>
+      <button class="btn-submit" id="btn-submit" onclick="submitRepair()">📨 ยืนยันแจ้งซ่อม</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- ═══ Toast แจ้งผล ═══ -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✅</span>
+  <div>
+    <div class="toast-title">แจ้งซ่อมสำเร็จ!</div>
+    <div class="toast-sub">ส่งแจ้งเตือนไปยัง Telegram แล้ว</div>
+  </div>
+</div>
 
 <script>
+ /* ═══════════════════════════════════════
+   CONFIG — แก้ 2 จุดนี้
+   ═══════════════════════════════════════ */
+var TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';   // ← ใส่ Token จริง
+var TELEGRAM_CHAT_ID   = 'YOUR_CHAT_ID';     // ← ใส่ Chat ID จริง 
 /* ═══ URL ของ Google Apps Script ═══ */
 var API_URL = 'https://script.google.com/macros/s/AKfycbxDfJ3o6n36rMKMkX7oNATq3jBSQtIsXsRQETOyv5TfqFk0mJeedVC9TH_28ioseoTj/exec';
 
