@@ -663,8 +663,7 @@ function render(data) {
   /* ซ่อน loading แสดง content */
   document.getElementById('loading').style.display = 'none';
   document.getElementById('content').style.display = 'block';
-}
-document.getElementById('repair-btn-wrap').style.display = 'block';
+  document.getElementById('repair-btn-wrap').style.display = 'block';
 }
 /* ═══ แสดง error ═══ */
 function showError(msg) {
@@ -696,7 +695,7 @@ async function load() {
     showError('โหลดข้อมูลไม่ได้ — ' + err.message);
   }
 }
- ส่วนใหม่: ระบบแจ้งซ่อม
+ /*ส่วนใหม่: ระบบแจ้งซ่อม
    ════════════════════════════════════════ */
  
 /* ── เลือกอาการ (Chip) ── */
