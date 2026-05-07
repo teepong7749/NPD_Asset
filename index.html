@@ -615,8 +615,8 @@ textarea.field-input{min-height:65px; resize:vertical}
  /* ═══════════════════════════════════════
    CONFIG — แก้ 2 จุดนี้
    ═══════════════════════════════════════ */
-var TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';   // ← ใส่ Token จริง
-var TELEGRAM_CHAT_ID   = 'YOUR_CHAT_ID';     // ← ใส่ Chat ID จริง 
+var TELEGRAM_BOT_TOKEN = '8791361440:AAEUJhYT8xaPFU4TimQVrlnD1ss5ODWVQ2E';   // ← ใส่ Token จริง
+var TELEGRAM_CHAT_ID   = '7760991769';     // ← ใส่ Chat ID จริง 
 /* ═══ URL ของ Google Apps Script ═══ */
 var API_URL = 'https://script.google.com/macros/s/AKfycbxDfJ3o6n36rMKMkX7oNATq3jBSQtIsXsRQETOyv5TfqFk0mJeedVC9TH_28ioseoTj/exec';
 
@@ -628,7 +628,8 @@ var STATUS_MAP = {
   'ชำรุด':      'status-broken',   /* แดง */
   'จำหน่าย':   'status-broken'    /* แดง */
 };
-
+/* ═══ เก็บข้อมูลครุภัณฑ์ปัจจุบัน ═══ */
+var currentAsset = null;
 /* ═══ ใส่ข้อมูลลง HTML ═══ */
 function set(id, val) {
   var el = document.getElementById(id);
@@ -637,6 +638,8 @@ function set(id, val) {
 
 /* ═══ แสดงข้อมูล ═══ */
 function render(data) {
+   /* ▼▼▼ เพิ่มบรรทัดนี้บนสุดของ render ▼▼▼ */
+  currentAsset = data;
   set('f-asset_id',    data.asset_id);      /* หมายเลขครุภัณฑ์ */
   set('f-property_no', data.property_no);   /* หมายสินทรัพย์ */
   set('f-brand',       data.brand);         /* ตราอักษร */
@@ -661,7 +664,8 @@ function render(data) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('content').style.display = 'block';
 }
-
+document.getElementById('repair-btn-wrap').style.display = 'block';
+}
 /* ═══ แสดง error ═══ */
 function showError(msg) {
   document.getElementById('loading').style.display = 'none';
@@ -692,6 +696,116 @@ async function load() {
     showError('โหลดข้อมูลไม่ได้ — ' + err.message);
   }
 }
+ ส่วนใหม่: ระบบแจ้งซ่อม
+   ════════════════════════════════════════ */
+ 
+/* ── เลือกอาการ (Chip) ── */
+var selectedSymptom = 'เปิดไม่ติด';
+document.getElementById('chip-group').addEventListener('click', function(e) {
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('#chip-group .chip').forEach(function(c) {
+    c.classList.remove('active');
+  });
+  chip.classList.add('active');
+  selectedSymptom = chip.getAttribute('data-val');
+});
+ 
+/* ── เปิด Popup ── */
+function openRepairModal() {
+  if (!currentAsset) return;
+ 
+  /* ดึงข้อมูลเครื่องใส่ popup อัตโนมัติ */
+  set('m-asset_id',    currentAsset.asset_id);
+  set('m-brand_model', (currentAsset.brand || '-') + ' ' + (currentAsset.model || ''));
+  set('m-sn_cpu',      currentAsset.sn_cpu);
+  set('m-location',    currentAsset.location);
+  set('m-user_name',   currentAsset.user_name);
+ 
+  /* เคลียร์ form */
+  document.getElementById('inp-reporter').value = '';
+  document.getElementById('inp-phone').value = '';
+  document.getElementById('inp-detail').value = '';
+ 
+  document.getElementById('modal-overlay').classList.add('active');
+}
+ 
+/* ── ปิด Popup ── */
+function closeRepairModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+ 
+/* กดพื้นหลังมืดปิด popup */
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeRepairModal();
+});
+ 
+/* ── ส่งแจ้งซ่อม ── */
+async function submitRepair() {
+  var reporter = document.getElementById('inp-reporter').value.trim();
+  var phone    = document.getElementById('inp-phone').value.trim();
+  var detail   = document.getElementById('inp-detail').value.trim();
+ 
+  if (!reporter || !phone) {
+    alert('กรุณากรอก ชื่อผู้แจ้ง และ เบอร์โทร');
+    return;
+  }
+ 
+  var btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังส่ง...';
+ 
+  /* สร้างข้อความ Telegram */
+  var msg = '🔧 *แจ้งซ่อมครุภัณฑ์*\n\n'
+    + '━━━━ ข้อมูลเครื่อง ━━━━\n'
+    + '📋 หมายเลข: `' + (currentAsset.asset_id || '-') + '`\n'
+    + '🏷️ ยี่ห้อ/รุ่น: ' + (currentAsset.brand || '-') + ' ' + (currentAsset.model || '') + '\n'
+    + '🔢 S/N CPU: `' + (currentAsset.sn_cpu || '-') + '`\n'
+    + '📍 สถานที่: ' + (currentAsset.location || '-') + '\n'
+    + '👤 ผู้ใช้เครื่อง: ' + (currentAsset.user_name || '-') + '\n\n'
+    + '━━━━ รายละเอียดแจ้งซ่อม ━━━━\n'
+    + '🙋 ผู้แจ้ง: ' + reporter + '\n'
+    + '📞 เบอร์: ' + phone + '\n'
+    + '🔍 อาการ: ' + selectedSymptom + '\n'
+    + '📝 รายละเอียด: ' + (detail || '-') + '\n\n'
+    + '📅 วันที่: ' + new Date().toLocaleDateString('th-TH', {
+        year:'numeric', month:'long', day:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      });
+ 
+  try {
+    var res = await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: msg,
+        parse_mode: 'Markdown'
+      })
+    });
+ 
+    if (res.ok) {
+      closeRepairModal();
+      showToast();
+    } else {
+      alert('ส่งไม่สำเร็จ กรุณาลองใหม่');
+    }
+  } catch (err) {
+    alert('เกิดข้อผิดพลาด: ' + err.message);
+  }
+ 
+  btn.disabled = false;
+  btn.textContent = '📨 ยืนยันแจ้งซ่อม';
+}
+ 
+/* ── แสดง Toast ── */
+function showToast() {
+  var toast = document.getElementById('toast');
+  toast.classList.add('active');
+  setTimeout(function() {
+    toast.classList.remove('active');
+  }, 4000);
+} 
 
 load();
 </script>
